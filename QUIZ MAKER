@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="quiz">
+    <h2 id="q"></h2>
+    <div id="options"></div>
+    <button onclick="next()">Next</button>
+    <h3 id="result"></h3>
+  </div>
+<script src="script.js"></script>
+</body>
+</html>
+
+body{font-family:Arial; display:flex; justify-content:center; margin-top:50px;}
+.{border:2px solid #333; padding:20px; width:300px;}
+button{margin-top:10px;}
+
+let quiz=[
+ {q:"HTML stands for?", o:["Hyper Text Markup Language","High Text ML","Home Tool ML"], a:0},
+ {q:"CSS used for?", o:["Logic","Styling","Database"], a:1}
+];
+let i=0,score=0;
+
+function load(){
+ document.getElementById("q").innerText=quiz[i].q;
+ let ops="";
+ quiz[i].o.forEach((e,j)=>{
+   ops+=`<input type="radio" name="op" value="${j}">${e}<br>`;
+ });
+ document.getElementById("options").innerHTML=ops;
+}
+function next(){
+ let ans=document.querySelector('input[name="op"]:checked');
+ if(ans && ans.value==quiz[i].a) score++;
+ i++;
+ if(i<quiz.length) load();
+ else document.getElementById("result").innerText="Score: "+score;
+}
+load();
+
