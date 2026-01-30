@@ -1,22 +1,5 @@
-let quiz=[
- {q:"HTML stands for?", o:["Hyper Text Markup Language","High Text ML","Home Tool ML"], a:0},
- {q:"CSS used for?", o:["Logic","Styling","Database"], a:1}
-];
-let i=0,score=0;
-
-function load(){
- document.getElementById("q").innerText=quiz[i].q;
- let ops="";
- quiz[i].o.forEach((e,j)=>{
-   ops+=`<input type="radio" name="op" value="${j}">${e}<br>`;
- });
- document.getElementById("options").innerHTML=ops;
-}
-function next(){
- let ans=document.querySelector('input[name="op"]:checked');
- if(ans && ans.value==quiz[i].a) score++;
- i++;
- if(i<quiz.length) load();
- else document.getElementById("result").innerText="Score: "+score;
-}
-load();
+let d = document.getElementById("display");
+function add(v){ d.value += v; }
+function clr(){ d.value = ""; }
+function del(){ d.value = d.value.slice(0,-1); }
+function calc(){ d.value = eval(d.value); }
