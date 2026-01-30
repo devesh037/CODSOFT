@@ -1,1 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>E-Commerce Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<header>
+  <h1>🛒 MyShop</h1>
+  <div class="cart">Cart: <span id="count">0</span></div>
+</header>
+
+<section class="products" id="products"></section>
+
+<section class="cart-box">
+  <h2>Cart Summary</h2>
+  <p>Total Items: <span id="items">0</span></p>
+  <p>Total Price: ₹<span id="total">0</span></p>
+  <button onclick="checkout()">Checkout</button>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+body{
+  font-family: Arial;
+  margin:0;
+  background:#f4f6f8;
+}
+
+header{
+  background:#111;
+  color:#fff;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  padding:20px;
+}
+
+.card{
+  background:#fff;
+  padding:15px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  transition:0.3s;
+}
+.card:hover{
+  transform:scale(1.05);
+}
+
+.card h3{ margin:10px 0; }
+.card p{ color:green; font-weight:bold; }
+
+button{
+  background:#111;
+  color:#fff;
+  padding:8px 12px;
+  border:none;
+  cursor:pointer;
+}
+
+.cart-box{
+  background:#fff;
+  margin:20px;
+  padding:20px;
+  border-radius:8px;
+}
+
+let products = [
+ {name:"Laptop", price:50000},
+ {name:"Headphones", price:2000},
+ {name:"Mobile", price:15000},
+ {name:"Shoes", price:3000}
+];
+
+let cartCount = 0;
+let total = 0;
+
+let container = document.getElementById("products");
+
+products.forEach((p,i)=>{
+ container.innerHTML += `
+  <div class="card">
+    <h3>${p.name}</h3>
+    <p>₹${p.price}</p>
+    <button onclick="add(${i})">Add to Cart</button>
+  </div>
+ `;
+});
+
+function add(i){
+ cartCount++;
+ total += products[i].price;
+ document.getElementById("count").innerText = cartCount;
+ document.getElementById("items").innerText = cartCount;
+ document.getElementById("total").innerText = total;
+}
+
+function checkout(){
+ alert("Order placed successfully!");
+ cartCount=0; total=0;
+ document.getElementById("count").innerText=0;
+ document.getElementById("items").innerText=0;
+ document.getElementById("total").innerText=0;
+}
